@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
+using Microsoft.AspNetCore.Identity;
 
 namespace MiniBlogi_Projekt.Data.Models
 {
@@ -23,6 +24,8 @@ namespace MiniBlogi_Projekt.Data.Models
         [MaxLength(500)]
         [Column(TypeName = "varchar(500)")]
         public string Content { get; set; }
+        public int Id { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Comment>? Comment
         {
             get; set;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniBlogi_Projekt.Data;
 
@@ -11,9 +12,10 @@ using MiniBlogi_Projekt.Data;
 namespace MiniBlogi_Projekt.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231130192326_personalizacja_uzytkownika")]
+    partial class personalizacja_uzytkownika
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,9 +322,6 @@ namespace MiniBlogi_Projekt.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("Id_user")
                         .HasColumnType("int");
 
@@ -331,12 +330,7 @@ namespace MiniBlogi_Projekt.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("NoteId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Note");
                 });
@@ -455,15 +449,6 @@ namespace MiniBlogi_Projekt.Data.Migrations
                     b.Navigation("Note");
                 });
 
-            modelBuilder.Entity("MiniBlogi_Projekt.Data.Models.Note", b =>
-                {
-                    b.HasOne("MiniBlogi_Projekt.ApplicationUser", "User")
-                        .WithMany("Comment")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MiniBlogi_Projekt.Data.Models.TagNote", b =>
                 {
                     b.HasOne("MiniBlogi_Projekt.Data.Models.Note", "Note")
@@ -481,11 +466,6 @@ namespace MiniBlogi_Projekt.Data.Migrations
                     b.Navigation("Note");
 
                     b.Navigation("Tag");
-                });
-
-            modelBuilder.Entity("MiniBlogi_Projekt.ApplicationUser", b =>
-                {
-                    b.Navigation("Comment");
                 });
 
             modelBuilder.Entity("MiniBlogi_Projekt.Data.Models.Image", b =>

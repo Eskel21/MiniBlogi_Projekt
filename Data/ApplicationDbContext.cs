@@ -7,7 +7,7 @@ using System;
 
 namespace MiniBlogi_Projekt.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
