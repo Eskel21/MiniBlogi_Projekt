@@ -5,6 +5,7 @@ using MiniBlogiv2.Data.Models;
 using MiniBlogiv2.Data;
 using MiniBlogiv2;
 
+namespace  MiniBlogiv2.Pages;
 public class EdytorModel : PageModel
 {
     private readonly ApplicationDbContext _context;
@@ -26,18 +27,17 @@ public class EdytorModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+
+        if (ModelState.IsValid)
         {
+            ModelState.AddModelError(string.Empty, "Wyst¹pi³ b³¹d walidacji.");
             return Page();
         }
 
         // Get the current user
         ApplicationUser user = await _userManager.GetUserAsync(User);
-
         // Assign the user ID to the Note
         Note.UserId = user.Id;
-
-        // Set any other properties or logic you need
 
         // Add the note to the database
         _context.Note.Add(Note);

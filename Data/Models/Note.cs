@@ -16,7 +16,6 @@ namespace MiniBlogiv2.Data.Models
         [Column(TypeName = "varchar(256)")]
         public string Description { get; set; }
 
-
         [Required]
         [MaxLength(500)]
         [Column(TypeName = "varchar(500)")]
