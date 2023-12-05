@@ -1,0 +1,31 @@
+﻿@page
+@model EdytorModel
+@using System.Security.Claims
+@{
+    ViewData["Title"] = "Edytor";
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+<h1>Create a New Note</h1>
+<form method="post" asp-page-handler="OnPostAsync">
+    <div>
+        <label asp-for="Note.Title"></label>
+        <input asp-for="Note.Title" name="Note.Title" class="form-control" />
+        <span asp-validation-for="Note.Title" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Note.Description"></label>
+        <input asp-for="Note.Description" name="Note.Description" class="form-control" />
+        <span asp-validation-for="Note.Description" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Note.Content"></label>
+        <textarea asp-for="Note.Content" name="Note.Content" class="form-control"></textarea>
+        <span asp-validation-for="Note.Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Note.UserId" value="@currentUserId" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create Note</button>
+</form>
