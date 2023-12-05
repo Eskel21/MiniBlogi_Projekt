@@ -53,7 +53,7 @@ namespace MiniBlogiv2.Data.Migrations
                     Description = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false),
                     Content = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    
                 },
                 constraints: table =>
                 {

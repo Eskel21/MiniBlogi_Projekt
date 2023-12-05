@@ -12,8 +12,8 @@ using MiniBlogiv2.Data;
 namespace MiniBlogiv2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231202222920_poprawki_v2")]
-    partial class poprawki_v2
+    [Migration("20231205215248_migracja2")]
+    partial class migracja2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -315,7 +315,7 @@ namespace MiniBlogiv2.Data.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                        .HasColumnType("varchar(MAX)");
 
                     b.Property<string>("Description")
                         .IsRequired()

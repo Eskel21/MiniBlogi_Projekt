@@ -18,9 +18,10 @@ namespace MiniBlogiv2.Data.Models
 
         [Required]
         [MaxLength(500)]
-        [Column(TypeName = "varchar(500)")]
+        [Column(TypeName = "varchar(MAX)")]
         public string Content { get; set; }
         public string UserId { get; set; }
+        
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Comment>? Comment
         {
