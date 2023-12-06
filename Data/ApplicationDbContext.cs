@@ -14,6 +14,8 @@ namespace MiniBlogiv2.Data
         public DbSet<Note> Note { get; set; }
         public DbSet<Image> Image { get; set; }
         public DbSet<Tag> Tag { get; set; }
+
+        public DbSet<TagNote> TagNote { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -47,7 +47,8 @@ public class EdytorModel : PageModel
 
         
         _context.Note.Add(Note);
-        if (SelectedTags != null && SelectedTags.Any())
+        await _context.SaveChangesAsync();
+       /* if (SelectedTags != null && SelectedTags.Any())
         {
             foreach (var tagId in SelectedTags)
             {
@@ -56,7 +57,7 @@ public class EdytorModel : PageModel
             }
 
             await _context.SaveChangesAsync();
-        }
+        }*/
 
         return RedirectToPage("/Index"); 
     }

@@ -18,7 +18,11 @@
         <input asp-for="Note.Description" name="Note.Description" class="form-control" />
         <span asp-validation-for="Note.Description" class="text-danger"></span>
     </div>
-
+    <div>
+        <label asp-for="SelectedTags"></label>
+        <select asp-for="SelectedTags" asp-items="@(new SelectList(Model.AllTags, "TagId", "Name"))" multiple class="form-control"></select>
+        <span asp-validation-for="SelectedTags" class="text-danger"></span>
+    </div>
     <div>
         <label asp-for="Note.Content"></label>
         <textarea asp-for="Note.Content" name="Note.Content" class="form-control"></textarea>
