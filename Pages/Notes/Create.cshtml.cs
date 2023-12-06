@@ -44,7 +44,7 @@ public class EdytorModel : PageModel
 
         // Add the note to the database
         _context.Note.Add(Note);
-        
+        await _context.SaveChangesAsync();
         if (SelectedTags != null && SelectedTags.Any())
         {
             foreach (var tagId in SelectedTags)

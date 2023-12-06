@@ -13,7 +13,8 @@ namespace MiniBlogiv2.Pages.Notes
     public class IndexModel : PageModel
     {
         private readonly MiniBlogiv2.Data.ApplicationDbContext _context;
-
+        public List<Tag> Tags { get; set; }
+        public List<TagNote> tagNotes { get; set; }
         public IndexModel(MiniBlogiv2.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -28,6 +29,8 @@ namespace MiniBlogiv2.Pages.Notes
                 Note = await _context.Note
                 .Include(n => n.User).ToListAsync();
             }
+            Tags = _context.Tag.ToList();
+            tagNotes = _context.TagNote.ToList();
         }
     }
 }

@@ -23,7 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Note[0].Content)
             </th>
-           
+            <th>
+                @Html.DisplayNameFor(model => model.Note[0].TagNotes)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -41,7 +43,20 @@
             <td>
                 @Html.Raw(item.Content)
             </td>
-            
+            <td>
+            @foreach(var tagnote in Model.tagNotes)
+            {
+              foreach(var tag in Model.Tags)
+                        {
+                            if(tag.TagId==tagnote.TagId&&tagnote.NoteId==item.NoteId)
+                            {
+                               
+                               <p>@tag.Name</p>
+                               
+                            }
+                        }
+            }
+           </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.NoteId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a> |

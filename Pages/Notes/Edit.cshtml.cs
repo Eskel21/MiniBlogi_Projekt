@@ -22,9 +22,13 @@ namespace MiniBlogiv2.Pages.Notes
 
         [BindProperty]
         public Note Note { get; set; } = default!;
+        [BindProperty]
+        public List<int> SelectedTags { get; set; }
 
+        public List<Tag> AllTags { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            AllTags = _context.Tag.ToList();
             if (id == null || _context.Note == null)
             {
                 return NotFound();
@@ -54,6 +58,16 @@ namespace MiniBlogiv2.Pages.Notes
             try
             {
                 await _context.SaveChangesAsync();
+                if (SelectedTags != null && SelectedTags.Any())
+                {
+                    foreach (var tagId in SelectedTags)
+                    {
+                        var tagNote = new TagNote { NoteId = Note.NoteId, TagId = tagId };
+                        _context.TagNote.Add(tagNote);
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
