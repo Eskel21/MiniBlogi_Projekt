@@ -1,8 +1,9 @@
 ﻿@page
 @model MiniBlogiv2.Pages.Notes.IndexModel
-
+@using System.Security.Claims
 @{
     ViewData["Title"] = "Index";
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 <h1>Index</h1>
@@ -22,16 +23,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Note[0].Content)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Note[0].User)
-            </th>
+           
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Note) {
-        <tr>
-            <td>
+            @if (item.UserId == currentUserId)
+            {
+                <tr>
+                    <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
@@ -40,15 +41,14 @@
             <td>
                 @Html.Raw(item.Content)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
+            
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.NoteId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.NoteId">Delete</a>
             </td>
         </tr>
+        }
 }
     </tbody>
 </table>

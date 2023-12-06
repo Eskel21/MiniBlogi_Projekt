@@ -1,0 +1,37 @@
+﻿﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+    <div class="banner"><img src="~/Rectangle 3.png"/></div>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <div class="ProfilePic">
+        @if (User.Identity.IsAuthenticated)
+        {
+            var user = await UserManager.GetUserAsync(User);
+            if (user != null && user.Picture != null)
+            {
+                <div class="ProfileBackground">
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(user.Picture)" alt="User Picture">
+                </div>
+            }
+            else
+            {
+                <p>No picture available</p>
+            }
+        }
+    </div>
+    <div class="UserInfo">
+        <div class="Username">@User.Identity?.Name</div>
+        <div class="Email">@User.FindFirstValue(ClaimTypes.Email)</div>
+    </div>
+
+   
+   
+    }
+    else
+    {
+        <div>Login Error</div>
+    }

@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MiniBlogiv2.Data.Models;
 using MiniBlogiv2.Data;
 using MiniBlogiv2;
+using Microsoft.EntityFrameworkCore;
 
-namespace  MiniBlogiv2.Pages;
+
 public class EdytorModel : PageModel
 {
     private readonly ApplicationDbContext _context;
@@ -13,6 +14,10 @@ public class EdytorModel : PageModel
 
     [BindProperty]
     public Note Note { get; set; }
+    [BindProperty]
+    public List<int> SelectedTags { get; set; }
+
+    public List<Tag> AllTags { get; set; }
 
     public EdytorModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
@@ -22,7 +27,8 @@ public class EdytorModel : PageModel
 
     public void OnGet()
     {
-        // Initialization logic if needed
+       AllTags=_context.Tag.ToList();
+
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -34,15 +40,24 @@ public class EdytorModel : PageModel
             return Page();
         }
 
-        // Get the current user
+        
         ApplicationUser user = await _userManager.GetUserAsync(User);
-        // Assign the user ID to the Note
+        
         Note.UserId = user.Id;
 
-        // Add the note to the database
+        
         _context.Note.Add(Note);
-        await _context.SaveChangesAsync();
+        if (SelectedTags != null && SelectedTags.Any())
+        {
+            foreach (var tagId in SelectedTags)
+            {
+                var tagNote = new TagNote { NoteId = Note.NoteId, TagId = tagId };
+                _context.TagNote.Add(tagNote);
+            }
 
-        return RedirectToPage("/Index"); // Redirect to the desired page after creating a note
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToPage("/Index"); 
     }
 }
