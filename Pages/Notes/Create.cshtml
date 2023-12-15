@@ -7,6 +7,12 @@
 }
 <h1>Create a New Note</h1>
 <form method="post" asp-page-handler="OnPostAsync">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+       
+        <input type="hidden" asp-for="Note.CreatedAt" value="@DateTime.Now" />
+        
+    </div>
     <div>
         <label asp-for="Note.Title"></label>
         <input asp-for="Note.Title" name="Note.Title" class="form-control" />

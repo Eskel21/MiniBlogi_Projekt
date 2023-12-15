@@ -15,6 +15,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Note[0].CreatedAt)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Note[0].Title)
             </th>
             <th>
@@ -34,7 +37,10 @@
             @if (item.UserId == currentUserId)
             {
                 <tr>
-                    <td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>

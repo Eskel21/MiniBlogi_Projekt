@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniBlogiv2.Data;
 
@@ -11,9 +12,10 @@ using MiniBlogiv2.Data;
 namespace MiniBlogiv2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231215145056_Data_wpisu")]
+    partial class Data_wpisu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,7 +264,7 @@ namespace MiniBlogiv2.Data.Migrations
 
                     b.HasIndex("NoteId");
 
-                    b.ToTable("Comment", (string)null);
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("MiniBlogiv2.Data.Models.Image", b =>
@@ -284,7 +286,7 @@ namespace MiniBlogiv2.Data.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.ToTable("Image", (string)null);
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("MiniBlogiv2.Data.Models.ImageNote", b =>
@@ -299,7 +301,7 @@ namespace MiniBlogiv2.Data.Migrations
 
                     b.HasIndex("NoteId");
 
-                    b.ToTable("ImageNote", (string)null);
+                    b.ToTable("ImageNote");
                 });
 
             modelBuilder.Entity("MiniBlogiv2.Data.Models.Note", b =>
@@ -336,7 +338,7 @@ namespace MiniBlogiv2.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Note", (string)null);
+                    b.ToTable("Note");
                 });
 
             modelBuilder.Entity("MiniBlogiv2.Data.Models.Tag", b =>
@@ -354,7 +356,7 @@ namespace MiniBlogiv2.Data.Migrations
 
                     b.HasKey("TagId");
 
-                    b.ToTable("Tag", (string)null);
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("MiniBlogiv2.Data.Models.TagNote", b =>
@@ -369,7 +371,7 @@ namespace MiniBlogiv2.Data.Migrations
 
                     b.HasIndex("NoteId");
 
-                    b.ToTable("TagNote", (string)null);
+                    b.ToTable("TagNote");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

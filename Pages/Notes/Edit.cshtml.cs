@@ -44,8 +44,7 @@ namespace MiniBlogiv2.Pages.Notes
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
+       
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
@@ -58,6 +57,13 @@ namespace MiniBlogiv2.Pages.Notes
             try
             {
                 await _context.SaveChangesAsync();
+
+                
+                var existingTagNotes = _context.TagNote.Where(tn => tn.NoteId == Note.NoteId);
+                _context.TagNote.RemoveRange(existingTagNotes);
+                await _context.SaveChangesAsync();
+
+                
                 if (SelectedTags != null && SelectedTags.Any())
                 {
                     foreach (var tagId in SelectedTags)
@@ -83,6 +89,7 @@ namespace MiniBlogiv2.Pages.Notes
 
             return RedirectToPage("./Index");
         }
+
 
         private bool NoteExists(int id)
         {

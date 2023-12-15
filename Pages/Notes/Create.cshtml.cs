@@ -41,7 +41,7 @@ public class EdytorModel : PageModel
         ApplicationUser user = await _userManager.GetUserAsync(User);
         // Assign the user ID to the Note
         Note.UserId = user.Id;
-
+        Note.CreatedAt = DateTime.Now;
         // Add the note to the database
         _context.Note.Add(Note);
         await _context.SaveChangesAsync();

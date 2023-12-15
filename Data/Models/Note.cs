@@ -21,6 +21,7 @@ namespace MiniBlogiv2.Data.Models
         [Column(TypeName = "varchar(MAX)")]
         public string Content { get; set; }
         public string UserId { get; set; }
+        public DateTime CreatedAt { get; set; }
         
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Comment>? Comment

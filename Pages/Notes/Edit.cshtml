@@ -16,6 +16,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Note.NoteId" />
             <div class="form-group">
+                
+                <input type="hidden" asp-for="Note.CreatedAt"/>
+               
+            </div>
+            <div class="form-group">
                 <label asp-for="Note.Title" class="control-label"></label>
                 <input asp-for="Note.Title" class="form-control" />
                 <span asp-validation-for="Note.Title" class="text-danger"></span>

@@ -8,7 +8,7 @@ namespace MiniBlogiv2
         public string Name { get; set; }
         public string Surname { get; set; }
         public byte[]? Picture { get; set; }
-        public virtual ICollection<Note>? Comment
+        public virtual ICollection<Note>? Notes
         {
             get; set;
         }
