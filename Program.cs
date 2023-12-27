@@ -6,10 +6,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MiniBlogiv2.Data;
+using MiniBlogiv2.Services;
 using MiniBlogiv2;
 using System;
 using System.Net.Http;
-
+using MiniBlogiv2.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
+builder.Services.AddTransient<CommentInterface,
+CommentService>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -47,5 +49,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
 
 app.Run();

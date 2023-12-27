@@ -1,60 +1,50 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-
-using System;
-
 using MiniBlogiv2.Data.Models;
 using MiniBlogiv2.Data;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Authorization;
-using MiniBlogiv2.Interfaces;
-using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MiniBlogiv2.Pages
 {
-    public class IndexModel : PageModel
+    public class UserPostsModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly CommentInterface _commentService;
-        
-        [BindProperty]
-        public Comment NewComment { get; set; }
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, CommentInterface commentService)
+        public UserPostsModel(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
-            _logger = logger;
             _context = context;
             _httpContextAccessor = httpContextAccessor;
-            _commentService = commentService;
         }
-        public List<Note> LatestNotes { get; set; }
-        public List<Note> Notes { get; set; }
-        public List<Comment> Comments { get; set; }
+        [BindProperty]
+        public Comment NewComment { get; set; }
+        public string UserName { get; set; }
+        public List<Note> UserNotes { get; set; }
         public int totalNotes { get; set; }
         public int pageNo { get; set; }
         public int pageSize { get; set; }
-        public IActionResult OnGet(int p=1, int s=10)
+
+        public IActionResult OnGet(string username, int p = 1, int s = 10)
         {
-            ViewData["NoteId"] = new SelectList(_context.Note, "NoteId", "NoteId");
-            LatestNotes = _context.Note
+            UserName = username;
+            
+            UserNotes = _context.Note
+            .Where(n => n.User.UserName == UserName)
             .OrderByDescending(n => n.CreatedAt)
             .Include(n => n.User)
             .Include(n => n.Comment)
             .Skip((p - 1) * s).Take(s)
             .ToList();
             pageSize = s;
-            totalNotes = _context.Note.Count();
+            totalNotes = _context.Note
+            .Where(n => n.User.UserName == UserName).Count();
             pageNo = p;
-            foreach (var note in LatestNotes)
-            {
-                note.Comment = _commentService.GetComments(note.NoteId).ToList();
-            }
+            
+           
 
             return Page();
         }
-        [Authorize]
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid || _context.Comment == null || NewComment == null)
@@ -65,8 +55,9 @@ namespace MiniBlogiv2.Pages
             _context.Comment.Add(NewComment);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage();
         }
+        
         public string GetIpAddress()
         {
             var remoteIpAddress = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress;
@@ -84,7 +75,6 @@ namespace MiniBlogiv2.Pages
 
             return "Unknown";
         }
-      
         public async Task<IActionResult> OnPostDeleteCommentAsync(int commentId)
         {
             var commentToDelete = await _context.Comment.FindAsync(commentId);
@@ -97,10 +87,7 @@ namespace MiniBlogiv2.Pages
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage();
         }
-
-
-
     }
 }

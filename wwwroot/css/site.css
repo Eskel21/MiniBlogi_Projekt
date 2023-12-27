@@ -125,3 +125,6 @@ body {
     flex-direction:column;
     align-content:right;
 }
+.page_nums{
+    margin-right:10px;
+}

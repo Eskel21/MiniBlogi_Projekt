@@ -20,5 +20,8 @@ namespace MiniBlogiv2.Data.Models
         [Required]
         public int NoteId { get; set; }
         public virtual Note Note { get; set; }
+
+        public string UserId { get; set; }
+        
     }
 }

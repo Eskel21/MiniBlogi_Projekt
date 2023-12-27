@@ -1,0 +1,81 @@
+﻿@page "/UserPosts/{username}"
+@model MiniBlogiv2.Pages.UserPostsModel
+@using System.Security.Claims;
+@{
+    ViewData["Title"] = $"{Model.UserName}'s Posts";
+    var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    
+}
+
+<paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
+
+<ul>
+    @foreach (var note in Model.UserNotes)
+    {
+
+        <ul class="Title">@note.Title</ul>
+        <ul class="Author">Autor: @note.User.UserName</ul>
+        <ul>@Html.Raw(note.Content)</ul>
+        <div class="Date">
+            <ul>@note.CreatedAt</ul>
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+
+                            <input type="hidden" asp-for="NewComment.Date_comment" value="@DateTime.Now" />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" asp-for="NewComment.UserId" value="@User.Identity.Name" />
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="NewComment.Content">Komentarz</label>
+                            <input asp-for="NewComment.Content" class="form-control" />
+                            <span asp-validation-for="NewComment.Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" asp-for="NewComment.Ip_computer" value="@Model.GetIpAddress()" />
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" asp-for="NewComment.NoteId" value="@note.NoteId" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Dodaj komentarz" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>Zaloguj się, aby dodać komentarz.</p>
+        }
+        <h3>Komentarze:</h3>
+        
+        <ul>
+            @foreach (var comment in note.Comment)
+            {
+                <li>
+                    @comment.Content - Dodany @comment.Date_comment przez użytkownika @comment.UserId o IP @comment.Ip_computer
+                    @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId)
+                    {
+                        <form method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id_comment">
+                            <button type="submit">Usuń</button>
+                        </form>
+                    }
+                </li>
+
+            }
+        </ul>
+        <hr />
+
+    }
+</ul>
+<paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
+

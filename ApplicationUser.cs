@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MiniBlogiv2.Data.Models;
+using System.Net;
 
 namespace MiniBlogiv2
 {
@@ -12,5 +13,6 @@ namespace MiniBlogiv2
         {
             get; set;
         }
+    
     }
 }
