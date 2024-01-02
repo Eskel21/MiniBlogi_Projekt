@@ -21,7 +21,7 @@
 
     <div>
         <label asp-for="Note.Description"></label>
-        <input asp-for="Note.Description" name="Note.Description" class="form-control" />
+        <input asp-for="Note.Description" name="Note.Description" class="form-control" maxlength="256" />
         <span asp-validation-for="Note.Description" class="text-danger"></span>
     </div>
     <div>

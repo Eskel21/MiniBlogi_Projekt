@@ -29,7 +29,7 @@ namespace MiniBlogiv2.Data.Models
             get; set;
         }
         
-        public string[] UsersLiked { get; set; }
+        public string[]? UsersLiked { get; set; }
         public ICollection<TagNote>? TagNotes { get; set; }
         public ICollection<ImageNote>? ImageNotes { get; set; }
     }
