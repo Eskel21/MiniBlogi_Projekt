@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MiniBlogiv2.Data.Models;
+using System.Reflection.Emit;
 
 namespace MiniBlogiv2.Data
 {
@@ -14,6 +15,8 @@ namespace MiniBlogiv2.Data
         public DbSet<Note> Note { get; set; }
         public DbSet<Image> Image { get; set; }
         public DbSet<Tag> Tag { get; set; }
+
+        
 
         public DbSet<TagNote> TagNote { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
@@ -47,6 +50,12 @@ namespace MiniBlogiv2.Data
             .HasOne<Note>(pg => pg.Note)
             .WithMany(g => g.ImageNotes)
             .HasForeignKey(g => g.NoteId);
+
+            builder.Entity<Note>()
+                .Property(e => e.UsersLiked)
+                .HasConversion(
+                    v => string.Join(',', v),
+                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
 
         }
 

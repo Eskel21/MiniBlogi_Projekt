@@ -14,9 +14,45 @@
             
             <ul class="Title">@note.Title</ul>
             <ul class="Author">Autor: <a asp-page="/UserPosts" asp-route-username="@note.User.UserName">@note.User.UserName</a></ul>
+            <ul class="Description">@note.Description</ul>
             <ul>@Html.Raw(note.Content)</ul>
             <div class="Date">
             <ul >@note.CreatedAt</ul>
+            </div>
+            <div class="likes">
+                <ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" asp-page-handler="Like" asp-route-noteId="@note.NoteId">
+                            <button type="submit" class="like-button">
+                                @if (note.UsersLiked != null && note.UsersLiked.Contains(User.Identity.Name))
+                                {
+                                    <img class="like_img_liked" src="~/fi_thumbs-up-color.png" />
+                                }
+                                else
+                                {
+                                    <img class="like_img" src="~/fi_thumbs-up.png" />
+                                }
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button type="submit" class="like-button">
+                           
+                                <img class="like_img" src="~/fi_thumbs-up.png" />
+                          
+                        </button>
+                    }
+                    @if (note.UsersLiked != null && note.UsersLiked.Length > 0)
+                {
+                    <span>@note.UsersLiked.Length</span> 
+                }
+                else
+                {
+                    <span>0</span>
+                }
+                </ul>
             </div>
             @if (User.Identity.IsAuthenticated)
             {
@@ -84,3 +120,4 @@
 
 </div>
 <paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
+

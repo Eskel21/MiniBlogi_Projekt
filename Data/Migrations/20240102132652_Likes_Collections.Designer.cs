@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniBlogiv2.Data;
 
@@ -11,9 +12,10 @@ using MiniBlogiv2.Data;
 namespace MiniBlogiv2.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240102132652_Likes_Collections")]
+    partial class Likes_Collections
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -306,6 +308,30 @@ namespace MiniBlogiv2.Data.Migrations
                     b.ToTable("ImageNote");
                 });
 
+            modelBuilder.Entity("MiniBlogiv2.Data.Models.Like", b =>
+                {
+                    b.Property<int>("LikeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LikeId"), 1L, 1);
+
+                    b.Property<int>("NoteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LikeId");
+
+                    b.HasIndex("NoteId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Like");
+                });
+
             modelBuilder.Entity("MiniBlogiv2.Data.Models.Note", b =>
                 {
                     b.Property<int>("NoteId")
@@ -335,10 +361,6 @@ namespace MiniBlogiv2.Data.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UsersLiked")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NoteId");
 
@@ -461,6 +483,25 @@ namespace MiniBlogiv2.Data.Migrations
                     b.Navigation("Note");
                 });
 
+            modelBuilder.Entity("MiniBlogiv2.Data.Models.Like", b =>
+                {
+                    b.HasOne("MiniBlogiv2.Data.Models.Note", "Note")
+                        .WithMany("Likes")
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MiniBlogiv2.ApplicationUser", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Note");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MiniBlogiv2.Data.Models.Note", b =>
                 {
                     b.HasOne("MiniBlogiv2.ApplicationUser", "User")
@@ -493,6 +534,8 @@ namespace MiniBlogiv2.Data.Migrations
 
             modelBuilder.Entity("MiniBlogiv2.ApplicationUser", b =>
                 {
+                    b.Navigation("Likes");
+
                     b.Navigation("Notes");
                 });
 
@@ -506,6 +549,8 @@ namespace MiniBlogiv2.Data.Migrations
                     b.Navigation("Comment");
 
                     b.Navigation("ImageNotes");
+
+                    b.Navigation("Likes");
 
                     b.Navigation("TagNotes");
                 });

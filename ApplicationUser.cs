@@ -13,6 +13,6 @@ namespace MiniBlogiv2
         {
             get; set;
         }
-    
+        
     }
 }
