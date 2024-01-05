@@ -44,14 +44,16 @@
                           
                         </button>
                     }
-                    @if (note.UsersLiked != null && note.UsersLiked.Length > 0)
-                {
-                    <span>@note.UsersLiked.Length</span> 
-                }
-                else
-                {
-                    <span>0</span>
-                }
+                    
+                        @if (note.UsersLiked != null && note.UsersLiked.Length > 0)
+                        {
+                        <span class="likes-count" data-toggle="tooltip" title="@string.Join(", ", note.UsersLiked)">@note.UsersLiked.Length</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                    
                 </ul>
             </div>
             @if (User.Identity.IsAuthenticated)
