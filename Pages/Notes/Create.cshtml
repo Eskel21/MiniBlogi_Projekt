@@ -5,7 +5,7 @@
     ViewData["Title"] = "Edytor";
     var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
-<h1>Create a New Note</h1>
+<h1>Dodaj nowy wpis</h1>
 <form method="post" asp-page-handler="OnPostAsync">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
@@ -13,29 +13,32 @@
         <input type="hidden" asp-for="Note.CreatedAt" value="@DateTime.Now" />
         
     </div>
+    <div class="inputs">
     <div>
-        <label asp-for="Note.Title"></label>
-        <input asp-for="Note.Title" name="Note.Title" class="form-control" />
+        
+        <input asp-for="Note.Title" name="Note.Title" placeholder="Tytuł" class="form-control" />
         <span asp-validation-for="Note.Title" class="text-danger"></span>
     </div>
 
     <div>
-        <label asp-for="Note.Description"></label>
-        <input asp-for="Note.Description" name="Note.Description" class="form-control" maxlength="256" />
+        
+            <input asp-for="Note.Description" name="Note.Description" placeholder="Opis (max. 256 znaków)" class="form-control" maxlength="256" />
         <span asp-validation-for="Note.Description" class="text-danger"></span>
     </div>
     <div>
-        <label asp-for="SelectedTags"></label>
-        <select asp-for="SelectedTags" asp-items="@(new SelectList(Model.AllTags, "TagId", "Name"))" multiple class="form-control"></select>
+        <label class="tags_label" asp-for="SelectedTags">Wybierz tagi</label>
+        <select asp-for="SelectedTags" asp-items="@(new SelectList(Model.AllTags, "TagId", "Name"))" multiple class="form-controlv2"></select>
         <span asp-validation-for="SelectedTags" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="Note.Content"></label>
+    </div>
+    <div class="content">
         <textarea asp-for="Note.Content" name="Note.Content" class="form-control"></textarea>
         <span asp-validation-for="Note.Content" class="text-danger"></span>
     </div>
     <div class="form-group">
         <input type="hidden" asp-for="Note.UserId" value="@currentUserId" />
     </div>
-    <button type="submit" class="btn btn-primary">Create Note</button>
+    <div class="button_note">
+    <button id="login-submit" type="submit" class="btn btn-primary">Dodaj wpis</button>
+    </div>
 </form>

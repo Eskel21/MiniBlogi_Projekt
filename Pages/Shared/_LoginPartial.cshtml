@@ -8,25 +8,31 @@
 
        
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><div class="nav-link login_font">Mój Profil</div></a>
         </li>
+        <li class="przerwa">|</li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Notes/Create">Dodaj wpis</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Notes/Create"><div class="nav-link login_font">Dodaj wpis</div></a>
         </li>
+        <li class="przerwa">|</li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Wyloguj się</button>
+                <button type="submit" class="nav-link btn btn-link text-dark login_font">Wyloguj się</button>
             </form>
         </li>
+       
     }
     else
     {
-     
+        
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Zarejestruj się</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><div class="nav-link login_font">Zaloguj się</div></a>
         </li>
+
+        <li class="przerwa">|</li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Zaloguj się</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><div class="nav-link login_font">Zarejestruj się</div></a>
         </li>
+        
     }
 </ul>
