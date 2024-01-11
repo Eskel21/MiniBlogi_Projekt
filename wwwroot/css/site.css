@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    font-family:Lexend;
 }
 
 @media (min-width: 768px) {
@@ -8,23 +12,120 @@ html {
     }
 }
 
-html {
-    position: relative;
-    min-height: 100%;
+header {
+    background: #451952;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+    padding: 10px;
+}
+.navbar-collapse {
+    display: flex;
+    flex-direction: row;
+}
+.container .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.PageTitle{
+    margin-right:auto;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-item {
+    margin-right: 68px;
+
+}
+
+button.nav-link{
+    background:#451952;
+    padding:0;
+    border:none;
+    color: #F5E1DF;
+}
+.nav-link {
+    text-decoration: none;
+    color: #F5E1DF;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+}
+.navbar-brand {
+    text-decoration: none;
+    color: #F5E1DF;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+}
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
 }
 
 body {
+    margin:0px;
     margin-bottom: 60px;
+    background: #F5E1DF;
+    font-family: Lexend;
+    color: #1D1A39;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
 }
-/* Dodaj do swojego arkusza stylów CSS */
-
-
-.image-container {
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+li {
+    display: list-item;
+    
+}
+    .image-container {
     display: flex;
     flex-wrap: wrap;
 }
 
-.thumbnail {
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+.page-link {
+    position: relative;
+    display: block;
+    color: #F5E1DF;
+    text-decoration: none;
+    background-color: #451952;
+    border: 1px solid ;
+    border-radius: 5px;
+    border-color: #451952;
+    padding: 5px;
+  
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #451952;
+    background-color: #F5E1DF;
+    border-color: #451952;
+}
+.page-item:not(:first-child) .page-link {
+    margin-left: 2px;
+}
+    .thumbnail {
     margin: 10px;
     cursor: pointer;
     position: relative;
@@ -127,4 +228,34 @@ body {
 }
 .page_nums{
     margin-right:10px;
+}
+.Title-blogi {
+    display:flex;
+    margin: 30px;
+    justify-content:center;
+    width: 90%;
+    font-size: 150px;
+    font-weight: 700;
+    color: transparent;
+    background-image: radial-gradient(#F39F5A, #AE445A, #662549, #451952, #1D1A39, #451952,#662549, #AE445A,#F39F5A);
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 50%;
+    background-position: -50%;
+    animation: animated-gradient 7s infinite alternate-reverse;
+}
+
+@keyframes animated-gradient {
+    to {
+        background-position: 50%;
+    }
+}
+
+.wpis {
+    display: flex;
+    justify-content:center;
+    
+    border-radius: 25px;
+    border: 3px dashed #662549;
+    background: #E8BCB9;
 }

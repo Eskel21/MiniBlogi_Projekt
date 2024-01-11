@@ -7,17 +7,18 @@
 }
 <paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
 <div class="text-center">
-    <h1 class="display-4">Mini Blogi</h1>
+    <h1 class="Title-blogi">MiniBlogi</h1>
     <ul>
         @foreach (var note in Model.LatestNotes)
         {
-            
+            <div class="wpis">
             <ul class="Title">@note.Title</ul>
             <ul class="Author">Autor: <a asp-page="/UserPosts" asp-route-username="@note.User.UserName">@note.User.UserName</a></ul>
             <ul class="Description">@note.Description</ul>
             <ul>@Html.Raw(note.Content)</ul>
             <div class="Date">
             <ul >@note.CreatedAt</ul>
+            </div>
             </div>
             <div class="likes">
                 <ul>
