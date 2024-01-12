@@ -91,6 +91,8 @@ body {
     display: flex;
     padding-left: 0;
     list-style: none;
+    justify-content: center;
+    font-size: 23px;
 }
 li {
     display: list-item;
@@ -260,6 +262,7 @@ li {
     justify-content: center;
     padding: 0;
     margin: auto;
+    align-items: center;
 }
 .text-center {
     display: flex;
@@ -271,7 +274,7 @@ li {
     font-weight: 600;
     display: flex;
     justify-content: start;
-    font-size: 30px;
+    font-size: 40px;
 }
 .Author {
     color: #662549;
@@ -290,7 +293,7 @@ ul.Author a {
     display: flex;
     flex-direction: row;
     color: #AE445A;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     align-items: baseline;
     padding: 0px;
@@ -340,6 +343,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    margin-top: 10px;
 }
 
 h1 {
@@ -541,6 +545,7 @@ h1 {
     font-weight: 600;
     line-height: 32px; /* 160% */
     letter-spacing: -0.2px;
+    padding-left :5px;
 
 }
 
@@ -639,3 +644,65 @@ h1 {
     font-size: 70px;
     color: #F5E1DF;
 }
+
+.lajki{
+    display: flex;
+    justify-content: center;
+}
+
+.like-button {
+    margin-top: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    border-color: #451952;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    background: #E8BCB9;
+
+}
+
+.like_img_liked {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 28px;
+    height: 26px;
+    border-radius: 8px;
+    background:none;
+    object-fit: cover;
+}
+.like_img {
+    width: 28px;
+    height: 26px;
+    border-radius: 8px;
+    background: none;
+    object-fit: cover;
+}
+.likes {
+    display: flex;
+    justify-content: center;
+
+}
+.likes-count {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    margin-top: 13px;
+    font-size: 20px;
+    font-weight: 600;
+    D
+}
+.l {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.lista-comment{
+    padding-left: 0px;
+}
+
+.col-1{
+display:none;
+}
+

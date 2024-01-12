@@ -9,16 +9,17 @@
 
 <paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
 
-<ul>
+<ul  class="lista-wpisow">
     @foreach (var note in Model.UserNotes)
     {
-
+        <div class="wpis">
         <ul class="Title">@note.Title</ul>
-        <ul class="Author">Autor: @note.User.UserName</ul>
-        <ul>@Html.Raw(note.Content)</ul>
-        <div class="Date">
-            <ul>@note.CreatedAt</ul>
+        <div class="Date"> 
+            <ul class="Author">@note.User.UserName</ul>
+            <ul class="klasa-data">@note.CreatedAt</ul>
         </div>
+        <ul class="Content">@Html.Raw(note.Content)</ul>
+       </div>
         @if (User.Identity.IsAuthenticated)
         {
             <div class="row">
@@ -34,9 +35,9 @@
                             <input type="hidden" asp-for="NewComment.UserId" value="@User.Identity.Name" />
                         </div>
 
-                        <div class="form-group">
-                            <label asp-for="NewComment.Content">Komentarz</label>
-                            <input asp-for="NewComment.Content" class="form-control" />
+                        <div class="Comment">
+                            <label asp-for="NewComment.Content" class="Comment-label">Komentarz</label>
+                            <input asp-for="NewComment.Content" class="Comment-input" />
                             <span asp-validation-for="NewComment.Content" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -45,8 +46,8 @@
                         <div class="form-group">
                             <input type="hidden" asp-for="NewComment.NoteId" value="@note.NoteId" />
                         </div>
-                        <div class="form-group">
-                            <input type="submit" value="Dodaj komentarz" class="btn btn-primary" />
+                        <div class="Comment">
+                            <input type="submit" value="Dodaj komentarz" class="btn btn-primary button-comment" />
                         </div>
                     </form>
                 </div>
@@ -58,15 +59,15 @@
         }
         <h3>Komentarze:</h3>
         
-        <ul>
+        <ul class="lista-comment">
             @foreach (var comment in note.Comment)
             {
-                <li>
-                    @comment.Content - Dodany @comment.Date_comment przez użytkownika @comment.UserId o IP @comment.Ip_computer
+                <li class="Comment-content">
+                    <p>@comment.Content</p> - Dodany @comment.Date_comment przez użytkownika @comment.UserId o IP @comment.Ip_computer
                     @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId)
                     {
-                        <form method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id_comment">
-                            <button type="submit">Usuń</button>
+                        <form class="form-delete-comment" method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id_comment">
+                            <button class="delete-comment" type="submit">Usuń</button>
                         </form>
                     }
                 </li>

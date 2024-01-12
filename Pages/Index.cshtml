@@ -5,34 +5,35 @@
     ViewData["Title"] = "Home page";
     var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
-<paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
+
 <div class="text-center">
     <h1 class="Title-blogi">MiniBlogi</h1>
+    <paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
     <ul class="lista-wpisow">
         @foreach (var note in Model.LatestNotes)
         {
             <div class="wpis">
             <ul class="Title">@note.Title</ul>
             <div class="Date">
-            <ul class="Author">Autor: <a asp-page="/UserPosts" asp-route-username="@note.User.UserName">@note.User.UserName</a></ul>
+            <ul class="Author"><a asp-page="/UserPosts" asp-route-username="@note.User.UserName">@note.User.UserName</a></ul>
             <ul class="klasa-data">@note.CreatedAt</ul>
             </div> 
             <ul class="Description">@note.Description</ul>
             <ul class="Content">@Html.Raw(note.Content)</ul>
             </div>
             <div class="likes">
-                <ul>
+                <ul class="l">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <form method="post" asp-page-handler="Like" asp-route-noteId="@note.NoteId">
+                        <form  class="lajki" method="post" asp-page-handler="Like" asp-route-noteId="@note.NoteId">
                             <button type="submit" class="like-button">
                                 @if (note.UsersLiked != null && note.UsersLiked.Contains(User.Identity.Name))
                                 {
-                                    <img class="like_img_liked" src="~/fi_thumbs-up-color.png" />
+                                    <img class="like_img_liked" src="~/fi_heartheartdark.png" />
                                 }
                                 else
                                 {
-                                    <img class="like_img" src="~/fi_thumbs-up.png" />
+                                    <img class="like_img" src="~/fi_heartheart.png" />
                                 }
                             </button>
                         </form>
@@ -41,7 +42,7 @@
                     {
                         <button type="submit" class="like-button">
                            
-                                <img class="like_img" src="~/fi_thumbs-up.png" />
+                                <img class="like_img" src="~/fi_heartheart.png">
                           
                         </button>
                     }
@@ -52,7 +53,7 @@
                         }
                         else
                         {
-                            <span>0</span>
+                            <span class="likes-count">0</span>
                         }
                     
                 </ul>
@@ -99,7 +100,7 @@
             {
                 <p>Wartość zmiennej s: @ViewData["NoteOwnerId"]</p>
             }
-            <ul>
+            <ul class="lista-comment">
                 @foreach (var comment in note.Comment)
                 {
                     <li class="Comment-content">
