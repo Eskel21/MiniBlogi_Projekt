@@ -20,6 +20,43 @@
         </div>
         <ul class="Content">@Html.Raw(note.Content)</ul>
        </div>
+        <div class="likes">
+            <ul class="l">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form class="lajki" method="post" asp-page-handler="Like" asp-route-noteId="@note.NoteId">
+                        <button type="submit" class="like-button">
+                            @if (note.UsersLiked != null && note.UsersLiked.Contains(User.Identity.Name))
+                            {
+                                <img class="like_img_liked" src="~/fi_heartheartdark.png" />
+                            }
+                            else
+                            {
+                                <img class="like_img" src="~/fi_heartheart.png" />
+                            }
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <button type="submit" class="like-button">
+
+                        <img class="like_img" src="~/fi_heartheart.png">
+
+                    </button>
+                }
+
+                @if (note.UsersLiked != null && note.UsersLiked.Length > 0)
+                {
+                    <span class="likes-count" data-toggle="tooltip" title="@string.Join(", ", note.UsersLiked)">@note.UsersLiked.Length</span>
+                }
+                else
+                {
+                    <span class="likes-count">0</span>
+                }
+
+            </ul>
+        </div>
         @if (User.Identity.IsAuthenticated)
         {
             <div class="row">

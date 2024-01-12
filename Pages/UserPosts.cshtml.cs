@@ -5,6 +5,7 @@ using MiniBlogiv2.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MiniBlogiv2.Pages
 {
@@ -88,6 +89,37 @@ namespace MiniBlogiv2.Pages
             }
 
             return RedirectToPage();
+        }
+        [Authorize]
+        public IActionResult OnPostLike(int noteId)
+        {
+            var note = _context.Note.FirstOrDefault(n => n.NoteId == noteId);
+
+            if (note != null)
+            {
+                var loggedInUserName = User.Identity.Name;
+
+
+                if (note.UsersLiked == null)
+                {
+                    note.UsersLiked = new string[] { loggedInUserName };
+                }
+                else if (note.UsersLiked.Contains(loggedInUserName))
+                {
+
+                    note.UsersLiked = note.UsersLiked.Where(u => u != loggedInUserName).ToArray();
+                }
+                else
+                {
+
+                    note.UsersLiked = note.UsersLiked.Append(loggedInUserName).ToArray();
+                }
+
+                _context.SaveChanges();
+            }
+
+
+            return RedirectToPage("./Index");
         }
     }
 }
