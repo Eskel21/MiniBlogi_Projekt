@@ -24,6 +24,9 @@ header {
     display: flex;
     flex-direction: row;
 }
+.container{
+    flex-direction:row;
+}
 .container .nav {
     display: flex;
     justify-content: center;
@@ -78,7 +81,6 @@ button.nav-link{
 }
 
 body {
-    margin:0px;
     margin-bottom: 60px;
     background: #F5E1DF;
     font-family: Lexend;
@@ -86,6 +88,10 @@ body {
     display: flex;
     height: 100%;
     flex-direction: column;
+}
+body, header {
+    margin: 0;
+    padding: 0;
 }
 .pagination {
     display: flex;
@@ -690,7 +696,7 @@ h1 {
     margin-top: 13px;
     font-size: 20px;
     font-weight: 600;
-    D
+    
 }
 .l {
     display: flex;
@@ -705,4 +711,33 @@ h1 {
 .col-1{
 display:none;
 }
+.profile_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lista-comment {
+    overflow-y: scroll;
+    margin: 20px;
+    padding: 20px;
+    max-height:300px;
 
+}
+.delete-comment {
+    
+    cursor: pointer;
+}
+.lista-comment::-webkit-scrollbar {
+    width: 10px;
+}
+
+.lista-comment::-webkit-scrollbar-track {
+    background-color: #E8BCB9;
+    border-radius: 20px 20px;
+}
+
+.lista-comment::-webkit-scrollbar-thumb {
+    background-color: #451952;
+    border-radius: 20px 20px;
+}

@@ -96,6 +96,7 @@
                 <p>Zaloguj się, aby dodać komentarz.</p>
             }
             <h3>Komentarze:</h3>
+            <div class="comments_container">
             @if (ViewData["NoteOwnerId"] != null)
             {
                 <p>Wartość zmiennej s: @ViewData["NoteOwnerId"]</p>
@@ -115,7 +116,7 @@
 
                 }
             </ul>
-            <hr />
+            </div>
 
         }
        
