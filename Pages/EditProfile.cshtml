@@ -1,29 +1,29 @@
 ﻿@page
 @model MiniBlogiv2.Pages.EditProfileModel
 @{
-    ViewData["Title"] = "Edit Profile";
+    ViewData["Title"] = "Zmień imię i nazwisko";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<form method="post">
+<form class="name-surname" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="Name"></label>
+    <div class="form-floating">
+        <label class="name-label" asp-for="Name">Imię</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Surname"></label>
+    <div class="form-floating">
+        <label class="name-label" asp-for="Surname">Nazwisko</label>
         <input asp-for="Surname" class="form-control" />
         <span asp-validation-for="Surname" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <div class="name-surname">
         
-        <input type="submit" value="Save" class="btn btn-primary" />
-        <input type="submit" value="Powrót" class="btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" />
+        <input id="login-submit" type="submit" value="Zapisz" class="btn btn-primary" />
+        <input id="login-submit" type="submit" value="Powrót" class="btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" />
     </div>
 </form>

@@ -192,14 +192,13 @@ li {
 
 .ProfilePic {
     position: absolute;
-    top: 38%;
-    left: 5%;
+    top: 400px;
+    left: 100px;
     transform: translateY(-50%);
     width: 325px;
     height: 325px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #B5D0FF;
+
+    
 }
 
     .ProfilePic img {
@@ -424,6 +423,7 @@ h1 {
     gap: 8px;
     flex-shrink: 0;
     border-radius: 15px;
+    margin-bottom:10px;
     background: #451952;
     color: #F5E1DF;
     font-family: Lexend;
@@ -433,13 +433,18 @@ h1 {
     line-height: 24px;
     letter-spacing: -0.16px;
     margin-top: 20px;
+    cursor:pointer;
+    transition:transform 0.3s ease;
 }
+    #login-submit:hover{
+        transform:scale(1.1);
+    }
 
-.icon-input .input-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
+    .icon-input .input-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
 
 .icon-input .icon {
     position: absolute;
@@ -817,15 +822,25 @@ display:none;
 .button-img:hover {
     transform:scale(1.1);
 }
-form div {
+form .form-div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .profile-nav-link {
-    color: #451952;
+    color: #F5E1DF;
     transition: transform 0.3s ease;
+    text-align: center;
+    border-radius: 35px;
+    background: #451952;
+    height:auto;
+    width: 200px;
+    justify-content: center;
+    align-content: center;
+}
+.nav-link-padding{
+    padding:15px;
 }
 .profile-nav-link:hover{
     transform:scale(1.1);
@@ -835,4 +850,65 @@ form div {
 }
 .break{
     margin:10px;
+}
+.name-surname {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top:35px;
+}
+.name-label {
+
+    font-size: 24px;
+    font-weight: 700;
+
+}
+form .name-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.manage-nav {
+    margin-top: 40px;
+    display: block;
+    float: left;
+    width: 300px;
+    border-radius: 25px;
+    border: 5px dashed #662549;
+}
+.col-md-9 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top:150px;
+}
+.navbar-nav.manage-nav li {
+    display: block;
+    margin-bottom: 10px;
+}
+.Email {
+    color: #AE445A;
+    font-size: 20px;
+    font-weight: 600;
+}
+.Username {
+    color: #1D1A39;
+    font-size:40px;
+    font-weight:bold;
+}
+.form-floatingv2 {
+    color: #192E51;
+    font-family: Lexend;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: -0.24px;
+    gap: 22px;
+    width: 100%;
+    align-items: flex-end;
+    margin: 10px;
 }

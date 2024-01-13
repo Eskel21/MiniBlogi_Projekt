@@ -58,7 +58,7 @@ namespace MiniBlogiv2.Pages
 
             await _userManager.UpdateAsync(user);
 
-            return RedirectToPage("/EditProfile");
+            return Redirect("/Identity/Account/Manage/Index");
         }
     }
 }

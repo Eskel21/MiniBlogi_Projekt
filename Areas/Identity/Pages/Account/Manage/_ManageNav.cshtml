@@ -2,28 +2,31 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-<ul class="nav nav-pills flex-column">
-    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profil</a></li>
-    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Hasło</a></li>
+
+<ul class="navbar-nav manage-nav">
+    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index"><div class="profile-nav-link nav-link-padding">Profil</div></a></li>
+    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email"><div class="profile-nav-link nav-link-padding">Email</div></a></li>
+    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword"><div class="profile-nav-link nav-link-padding">Hasło</div></a></li>
     @if (hasExternalLogins)
     {
         <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link profile-nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
     }
-    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Dane osobowe</a></li>
-    <a class="nav-link profile-nav-link  " asp-area="" asp-page="/Tags/Index">Zarządzaj tagami</a>
+   
+    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData"><div class="profile-nav-link nav-link-padding">Dane osobowe</div></a></li>
     <li class="nav-item">
-        <a class="nav-link profile-nav-link" asp-area="" asp-page="/ClipArty">Avatars</a>
+        <a class="nav-link profile-nav-link  " asp-area="" asp-page="/Tags/Index"><div class="profile-nav-link nav-link-padding">Tagi</div></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link profile-nav-link" asp-area="" asp-page="/Notes/Index">Moje wpisy</a>
+        <a class="nav-link profile-nav-link" asp-area="" asp-page="/ClipArty"><div class="profile-nav-link nav-link-padding">Obrazy</div></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link profile-nav-link" asp-area="" asp-page="/EditImage">Edytuj zdjęcie profilowe</a>
+        <a class="nav-link profile-nav-link" asp-area="" asp-page="/Notes/Index"><div class="profile-nav-link nav-link-padding">Moje wpisy</div></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link profile-nav-link" asp-area="" asp-page="/EditProfile">Edytuj imię i nazwisko</a>
+        <a class="nav-link profile-nav-link" asp-area="" asp-page="/EditImage"><div class="profile-nav-link nav-link-padding">Profilowe</div></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link profile-nav-link" asp-area="" asp-page="/EditProfile"><div class="profile-nav-link nav-link-padding">Imię</div></a>
     </li>
 
 </ul>
