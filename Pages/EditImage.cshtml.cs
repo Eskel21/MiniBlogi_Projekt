@@ -1,39 +1,47 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
+using MiniBlogiv2;
+using MiniBlogiv2.Data;
+using System.IO;
+using System.Threading.Tasks;
 
-namespace MiniBlogiv2.Pages
+public class ProfileModel : PageModel
 {
-    
-        public class ProfileModel : PageModel
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ApplicationDbContext _context;
+
+    [BindProperty]
+    public IFormFile Picture { get; set; }
+
+    public ProfileModel(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+    {
+        _userManager = userManager;
+        _context = context;
+    }
+    [BindProperty]
+    public string CanvasData { get; set; }
+
+    public async Task<IActionResult> OnPostSaveImageAsync()
+    {
+        if (ModelState.IsValid)
         {
-            private readonly UserManager<ApplicationUser> _userManager;
+            var user = await _userManager.GetUserAsync(User);
 
-
-            [BindProperty]
-            public IFormFile Picture { get; set; }
-
-            public ProfileModel(UserManager<ApplicationUser> userManager)
+            if (user != null && !string.IsNullOrEmpty(CanvasData))
             {
-                _userManager = userManager;
+                
+                user.Picture = Convert.FromBase64String(CanvasData.Split(',')[1]);
 
-            }
+                await _userManager.UpdateAsync(user);
 
-            public async Task<IActionResult> OnPostAsync()
-            {
-                if (Picture != null && Picture.Length > 0)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await Picture.CopyToAsync(memoryStream);
-                        var user = await _userManager.GetUserAsync(User);
-                        user.Picture = memoryStream.ToArray();
-                        await _userManager.UpdateAsync(user);
-                    }
-                }
+               _context.SaveChanges();
 
-                return RedirectToPage("/EditImage");
+                return Redirect("/Identity/Account/Manage/Index");
             }
         }
-    
+
+        return Page();
+    }
 }

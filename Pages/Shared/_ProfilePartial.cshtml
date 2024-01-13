@@ -7,13 +7,13 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="ProfilePic">
+    <div>
         @if (User.Identity.IsAuthenticated)
         {
             var user = await UserManager.GetUserAsync(User);
             if (user != null && user.Picture != null)
             {
-                <div class="ProfileBackground">
+                <div class="ProfilePic">
                     <img src="data:image/jpeg;base64,@Convert.ToBase64String(user.Picture)" alt="User Picture">
                 </div>
             }
