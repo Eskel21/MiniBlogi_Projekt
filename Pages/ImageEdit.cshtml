@@ -3,19 +3,19 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-    <div class="banner"><img src="~/Rectangle 3.png"/></div>
+   
 
     @if (SignInManager.IsSignedIn(User))
     {
-    <div class="ProfilePic">
+        <div>
         @if (User.Identity.IsAuthenticated)
         {
             var user = await UserManager.GetUserAsync(User);
             if (user != null && user.Picture != null)
             {
-                <div class="ProfileBackground">
+                
                     <img src="data:image/jpeg;base64,@Convert.ToBase64String(user.Picture)" alt="User Picture">
-                </div>
+                
             }
             else
             {
@@ -24,13 +24,58 @@
         }
     </div>
     <form method="post" enctype="multipart/form-data">
-        <label for="profileImage">Profile Image:</label>
-        <input type="file" id="profileImage" name="Picture" accept=".jpg, .jpeg, .png" />
-        <button type="submit">Save Changes</button>
+        <label for="profileImage">Zdjęcie profilowe:</label>
+        <input class="custom-file-input" type="file" id="profileImage" name="Picture" accept=".jpg, .jpeg, .png" onchange="loadImage()" />
+        <div>
+        <button class="button-img" type="submit">Zapisz zmiany</button>
+        </div>
     </form>
-   
+    <canvas id="canvas" width="300" height="300" style="border:1px solid #000;"></canvas>
     }
     else
     {
         <div>Login Error</div>
     }
+<script>
+    function loadImage() {
+        const fileInput = document.getElementById('profileImage'); 
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    drawCircularImage(img, ctx);
+                };
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function drawCircularImage(img, ctx) {
+        const canvas = ctx.canvas;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = Math.min(centerX, centerY);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        ctx.clip();
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Opcjonalnie możesz narysować obramowanie okręgu
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = '#000';
+        ctx.stroke();
+    }
+</script>
