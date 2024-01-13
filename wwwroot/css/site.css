@@ -197,8 +197,17 @@ li {
     transform: translateY(-50%);
     width: 325px;
     height: 325px;
-
-    
+    border-radius: 50%;
+    background-color: #E8BCB9;
+    overflow:hidden;
+}
+.ProfilePicv2 {
+   
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #E8BCB9;
+    overflow: hidden;
 }
 
     .ProfilePic img {
