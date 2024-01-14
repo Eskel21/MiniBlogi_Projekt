@@ -20,32 +20,12 @@ namespace MiniBlogiv2.Pages
         }
         [BindProperty]
         public List<ApplicationUser> Users { get; set; }
+     
 
         public IActionResult OnGet()
         {
-            Users =_context.Users.ToList();
-
+            Users = _context.Users.ToList();
             return Page();
         }
-
-        public IActionResult OnPostDeleteUser(int userId)
-        {
-            if (userId <= 0)
-            {
-                return NotFound();
-            }
-
-            var userToDelete = _context.Users.FirstOrDefault(u => u.Id.Equals(userId));
-
-            if (userToDelete == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(userToDelete);
-            _context.SaveChanges();
-
-            return RedirectToPage("/UserList");
-        }
-}
+    }
 }

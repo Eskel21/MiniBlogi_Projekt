@@ -1,57 +1,49 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using MiniBlogiv2.Data;
-using MiniBlogiv2.Data.Models;
-using System.Threading.Tasks;
 
-namespace MiniBlogiv2.Pages.Users
+namespace MiniBlogiv2.Pages
 {
-    public class DeleteUserModel : PageModel
+    public class DeleteUsernModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public DeleteUserModel(ApplicationDbContext context)
+        public DeleteUsernModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
+        public string Id { get; set; }
+
         public ApplicationUser UserToDelete { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string userId)
+        public IActionResult OnGet()
         {
-            if (userId == null)
-            {
-                return NotFound();
-            }
-
-            UserToDelete = await _context.Users.FirstOrDefaultAsync(m => m.Id == userId);
+            UserToDelete = _context.Users.Find(Id);
 
             if (UserToDelete == null)
             {
-                return NotFound();
+                
+                return Redirect("/UserList");
             }
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string userId)
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (userId == null)
-            {
-                return NotFound();
+           
+                var userToDelete =  await _context.Users.FindAsync(Id);
+                if (userToDelete != null)
+                {
+                
+                    _context.Users.Remove(userToDelete);
+                    await _context.SaveChangesAsync();
             }
 
-            UserToDelete = await _context.Users.FindAsync(userId);
-
-            if (UserToDelete != null)
-            {
-                _context.Users.Remove(UserToDelete);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+            
+            return Redirect("./UserList");
         }
     }
 }
