@@ -2,35 +2,41 @@
 @model MiniBlogiv2.Pages.Tags.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tagi";
 }
 
-<h1>Index</h1>
+<h1>Tagi</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
+<div class="tabela-tag">
+<table class="table-tag">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Tag[0].Name)
             </th>
-            <th></th>
+            <th>Opcje</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Tag) {
         <tr>
-            <td>
+            <td class="tag-name">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.TagId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.TagId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.TagId">Delete</a>
+            <td class="opcje">
+                <a asp-page="./Edit" asp-route-id="@item.TagId">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@item.TagId">Informacje</a> |
+                <a asp-page="./Delete" asp-route-id="@item.TagId">Usuń</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
+
+<div class="div_bat">
+<p class="button-add-tag">
+    <img src=~/fi_plus.png />
+    <a asp-page="Create">Stwórz nowy tag</a>
+</p>
+</div>
