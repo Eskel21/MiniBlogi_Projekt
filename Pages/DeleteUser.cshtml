@@ -1,0 +1,18 @@
+﻿@page
+@model DeleteUsernModel
+@{
+}
+<h2>Delete Confirmation</h2>
+
+@if (Model.UserToDelete != null)
+{
+    <p>Czy na pewno chcesz usunąć tego użytkownika: @Model.UserToDelete.Id, Username: @Model.UserToDelete.UserName, Email: @Model.UserToDelete.Email?</p>
+    <form method="post">
+        <input type="hidden" asp-page="UserList" name="Id" value="@Model.UserToDelete.Id" />
+        <button type="submit">Potwierdź</button>
+    </form>
+}
+else
+{
+    <p>User not found.</p>
+}
