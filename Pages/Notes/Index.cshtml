@@ -6,30 +6,34 @@
     var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
+<h1>Moje wpisy</h1>
+<div class="div_bat">
+<p class="button-add-tag">
+    <img src=~/fi_plus.png />
+    <a asp-page="Create">Dodaj wpis</a>
 </p>
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Note[0].CreatedAt)
+                Stworzony przez
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note[0].Title)
+                Tytuł
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note[0].Description)
+                Opis
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note[0].Content)
+                Treść
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Note[0].TagNotes)
+                Tagi
             </th>
-            <th></th>
+            <th>
+                Opcje
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -63,10 +67,9 @@
                         }
             }
            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.NoteId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.NoteId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.NoteId">Delete</a>
+            <td class="opcje">
+                <a asp-page="./Edit" asp-route-id="@item.NoteId">Edytuj</a> 
+                <a asp-page="./Delete" asp-route-id="@item.NoteId">Usuń</a>
             </td>
         </tr>
         }

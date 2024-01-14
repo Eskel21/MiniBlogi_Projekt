@@ -2,17 +2,21 @@
 @model DeleteUsernModel
 @{
 }
-<h2>Delete Confirmation</h2>
+<h1>Usuń użytkownika</h1>
 
 @if (Model.UserToDelete != null)
-{
-    <p>Czy na pewno chcesz usunąć tego użytkownika: @Model.UserToDelete.Id, Username: @Model.UserToDelete.UserName, Email: @Model.UserToDelete.Email?</p>
-    <form method="post">
+{<div class="pytanie">
+    <p><span class="pogrubione">Czy na pewno chcesz usunąć tego użytkownika:</span><br>
+        <span class="pogrubione">Id: </span> @Model.UserToDelete.Id<br>
+        <span class="pogrubione">Username: </span> @Model.UserToDelete.UserName<br>
+        <span class="pogrubione">Email: </span> @Model.UserToDelete.Email?</p>
+    </div>
+    <form class="delete-user"method="post">
         <input type="hidden" asp-page="UserList" name="Id" value="@Model.UserToDelete.Id" />
-        <button type="submit">Potwierdź</button>
+        <button type="submit" class="button-comment">Potwierdź</button>
     </form>
 }
 else
 {
-    <p>User not found.</p>
+    <p class="pogrubione">User not found.</p>
 }

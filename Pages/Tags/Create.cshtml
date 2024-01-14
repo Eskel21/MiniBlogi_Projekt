@@ -2,31 +2,30 @@
 @model MiniBlogiv2.Pages.Tags.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Twozenie";
 }
 
-<h1>Create</h1>
+<h1>Stwórz nowy tag</h1>
 
-<h4>Tag</h4>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="edit-tag">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Tag.Name" class="control-label"></label>
+                <label asp-for="Tag.Name" class="edit-label"></label>
                 <input asp-for="Tag.Name" class="form-control" />
                 <span asp-validation-for="Tag.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="edit-tag">
+                <input type="submit" value="Stwórz" class="btn btn-primary button-save-edit" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
+<div class="back-to-list">
+    <a class="back-to-list-button" asp-page="Index">Powrót do listy</a>
 </div>
 
 @section Scripts {

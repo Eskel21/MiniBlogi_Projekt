@@ -5,42 +5,26 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Usuń post</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3 class="pogrubione">Czy jestes pewnien, że chcesz usunąć ten post?</h3>
 <div>
-    <h4>Note</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Note.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Note.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Note.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Note.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Note.Content)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Note.Content)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Note.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Note.User.Id)
-        </dd>
-    </dl>
-    
-    <form method="post">
+    <div class="delete-post">
+        <div>
+            <span class="pogrubione2"> Tytuł: </span>@Html.DisplayFor(model => model.Note.Title) 
+        </div>
+ 
+        <div> 
+            <span class="pogrubione2"> Opis: </span>@Html.DisplayFor(model => model.Note.Description)
+        </div>
+     
+    </div>
+   
+    <form class="wysrodkuj" method="post">
         <input type="hidden" asp-for="Note.NoteId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Usuń" class="btn btn-danger button-save-edit" />
     </form>
+</div>
+<div class="back-to-list">
+    <a class="back-to-list-button"asp-page="./Index">Powrót do listy</a>
 </div>

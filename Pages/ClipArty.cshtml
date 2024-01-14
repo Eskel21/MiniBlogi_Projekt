@@ -1,14 +1,14 @@
 ﻿@page
 @model MiniBlogiv2.Pages.ClipArtyModel
 @{
-    ViewData["Title"] = "ClipArty";
+    ViewData["Title"] = "Obrazy";
 }
 
-<h1>ClipArty</h1>
+<h1>Obrazy</h1>
 
 @if (Model.Images != null && Model.Images.Any())
 {
-    <h2>Dostępne ClipArty:</h2>
+    <h3 class="pogrubione">Dostępne obrazy:</h3>
     <div class="image-container">
         @foreach (var image in Model.Images)
         {
@@ -24,18 +24,18 @@
     <img id="modalContent" class="modal-content" />
 </div>
 <div>
-    <h2>Dodaj nowe ClipArty:</h2>
+    <h3 class="pogrubione">Dodaj nowe obrazy:</h3>
     <form method="post" enctype="multipart/form-data">
-        <div>
-            <label for="title">Tytuł:</label>
-            <input type="text" id="title" name="Title" required />
+        <div class="wysrodkuj clipart-title">
+            <label class="labelka" for="title">Tytuł:</label>
+            <input class="form-control" type="text" id="title" name="Title" required />
         </div>
-        <div>
-            <label for="image">Wybierz obraz:</label>
-            <input type="file" id="image" name="image" accept="image/*" required />
+        <div class="wysrodkuj clipart-title">
+            <label class="labelka" for="image">Wybierz obraz:</label>
+            <input class="custom-file-input" type="file" id="image" name="image" accept="image/*" required />
         </div>
-        <div>
-            <button type="submit">Dodaj</button>
+        <div class="wysrodkuj">
+            <button class="button-save-edit" type="submit">Dodaj</button>
         </div>
     </form>
 </div>

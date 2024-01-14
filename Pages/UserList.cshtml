@@ -8,7 +8,7 @@
         <tr>
             <th>Nick</th>
             <th>Email</th>
-            <th>Actions</th>
+            <th>Usuń</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
             <tr>
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
-                <td>
+                <td class="delete-button-admin">
                     <button class="like-button"><a asp-page="DeleteUser" asp-route-id="@user.Id"> <img class="like_img" src="~/fi_delete.png" /></a></button>
                 </td>
             </tr>
