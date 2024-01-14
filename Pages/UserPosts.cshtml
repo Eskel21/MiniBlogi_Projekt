@@ -18,7 +18,13 @@
             <ul class="Author">@note.User.UserName</ul>
             <ul class="klasa-data">@note.CreatedAt</ul>
         </div>
-        <ul class="Content">@Html.Raw(note.Content)</ul>
+            <ul class="Content">
+                <span class="read-more" onclick="toggleContent(this)">Wyświetl więcej</span>
+                <div class="Content post-content">
+
+                    @Html.Raw(note.Content)
+                </div>
+            </ul>
        </div>
         <div class="likes">
             <ul class="l">
@@ -95,25 +101,55 @@
             <p>Zaloguj się, aby dodać komentarz.</p>
         }
         <h3>Komentarze:</h3>
-        
-        <ul class="lista-comment">
-            @foreach (var comment in note.Comment)
-            {
-                <li class="Comment-content">
-                    <p>@comment.Content</p> - Dodany @comment.Date_comment przez użytkownika @comment.UserId o IP @comment.Ip_computer
-                    @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId)
-                    {
-                        <form class="form-delete-comment" method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id_comment">
-                            <button class="delete-comment" type="submit">Usuń</button>
-                        </form>
-                    }
-                </li>
+        if (note.Comment.Any())
+        {
+            <ul class="lista-comment">
+                @foreach (var comment in note.Comment)
+                {
+                    <li class="Comment-content">
+                        <p>@comment.Content</p> - Dodany @comment.Date_comment przez użytkownika @comment.UserId o IP @comment.Ip_computer
+                        @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId)
+                        {
+                            <form class="form-delete-comment" method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id_comment">
+                                <button class="delete-comment" type="submit">Usuń</button>
+                            </form>
+                        }
+                    </li>
 
-            }
-        </ul>
-        <hr />
+                }
+            </ul>
+        }
+        else
+        {
+            <li class="Comment-content"><p>Brak komentarzy</p></li>
+        }
 
     }
 </ul>
 <paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
 
+<script>
+    function toggleContent(element) {
+        var contentDiv = element.nextElementSibling;
+        contentDiv.classList.toggle('full-content');
+        element.innerText = contentDiv.classList.contains('full-content') ? 'Zwiń' : 'Wyświetl więcej';
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        var spanElements = document.querySelectorAll('.sr-only');
+
+        spanElements.forEach(function (spanElement) {
+            if (spanElement.textContent.includes("First")) {
+                spanElement.textContent = "Pierwsza";
+            }
+            if (spanElement.textContent.includes("Previous")) {
+                spanElement.textContent = "Poprzednia";
+            }
+            if (spanElement.textContent.includes("Next")) {
+                spanElement.textContent = "Następna";
+            }
+            if (spanElement.textContent.includes("Last")) {
+                spanElement.textContent = "Ostatnia";
+            }
+        });
+    });
+</script>

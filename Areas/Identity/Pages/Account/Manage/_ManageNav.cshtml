@@ -2,7 +2,6 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-
 <ul class="navbar-nav manage-nav">
     <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index"><div class="profile-nav-link nav-link-padding">Profil</div></a></li>
     <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email"><div class="profile-nav-link nav-link-padding">Email</div></a></li>
@@ -11,8 +10,8 @@
     {
         <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link profile-nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
     }
-   
-    <li class="nav-item"><a class="nav-link profile-nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData"><div class="profile-nav-link nav-link-padding">Dane osobowe</div></a></li>
+
+    
     <li class="nav-item">
         <a class="nav-link profile-nav-link  " asp-area="" asp-page="/Tags/Index"><div class="profile-nav-link nav-link-padding">Tagi</div></a>
     </li>
@@ -28,7 +27,7 @@
     <li class="nav-item">
         <a class="nav-link profile-nav-link" asp-area="" asp-page="/EditProfile"><div class="profile-nav-link nav-link-padding">Imię</div></a>
     </li>
-    @if (User.IsInRole("Administrator"))
+    @if (User.IsInRole("Admin"))
 {
     <li class="nav-item">
         <a class="nav-link profile-nav-link" asp-area="" asp-page="/UserList"><div class="profile-nav-link nav-link-padding">Lista Użytkowników</div></a>

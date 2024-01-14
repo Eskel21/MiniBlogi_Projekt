@@ -291,6 +291,7 @@ li {
     font-size: 24px;
     font-weight: 600;
     font-style: normal;
+    transition: transform 0.3s ease;
 }
 ul.Author a {
     color: #662549;
@@ -298,8 +299,12 @@ ul.Author a {
     font-weight: 600;
     text-decoration: none;
     font-style: normal;
+    
 }
-.Date {
+    .Author:hover {
+        transform:scale(1.1);
+    }
+    .Date {
     display: flex;
     flex-direction: row;
     color: #AE445A;
@@ -329,7 +334,7 @@ ul.Author a {
     font-weight: 600;
     display: flex;
     flex-direction:column;
-    justify-content: center;
+    
 }
 
 ul.Content img {
@@ -920,4 +925,46 @@ form .name-label {
     width: 100%;
     align-items: flex-end;
     margin: 10px;
+}
+.post-content {
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height 0.3s ease;
+}
+
+.full-content {
+    max-height: none !important; 
+}
+
+.read-more {
+    color: #AE445A;
+    cursor: pointer;
+    display: block;
+    transition: color 0.3s ease;
+}
+    .read-more:hover {
+        color: #451952;
+    }
+.backv2 {
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #451952;
+    color: #F5E1DF;
+    font-family: Lexend;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.disabled{
+    color:grey;
+
 }
