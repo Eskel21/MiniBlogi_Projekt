@@ -945,3 +945,26 @@ form .name-label {
     .read-more:hover {
         color: #451952;
     }
+.backv2 {
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #451952;
+    color: #F5E1DF;
+    font-family: Lexend;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.16px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.disabled{
+    color:grey;
+
+}
