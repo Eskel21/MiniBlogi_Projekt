@@ -1,0 +1,29 @@
+﻿@page
+@model UserListModel
+
+<h2>Lista użytkowników</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td> 
+                    <form class="usuwanie" method="post" asp-page-handler="DeleteUser" asp-route-userId="@user.Id">
+                        <button type="submit" class="like-button">
+                            <img class="like_img" src="~/fi_delete.png"/>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

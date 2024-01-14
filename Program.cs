@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,12 @@ using MiniBlogiv2;
 using System;
 using System.Net.Http;
 using MiniBlogiv2.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using MiniBlogiv2.Data;
+using MiniBlogiv2.Services;
+using MiniBlogiv2.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,12 +28,33 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 builder.Services.AddTransient<CommentInterface,
 CommentService>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    if (!await roleManager.RoleExistsAsync("Administrator"))
+        await roleManager.CreateAsync(new IdentityRole("Administrator"));
+
+    if (!await roleManager.RoleExistsAsync("U¿ytkownik"))
+        await roleManager.CreateAsync(new IdentityRole("U¿ytkownik"));
+
+    var user = await userManager.FindByEmailAsync("michalinawasiluk@gmail.com");
+    await userManager.AddToRoleAsync(user, "Administrator");
+
+}
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

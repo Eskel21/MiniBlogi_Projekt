@@ -28,5 +28,10 @@
     <li class="nav-item">
         <a class="nav-link profile-nav-link" asp-area="" asp-page="/EditProfile"><div class="profile-nav-link nav-link-padding">Imię</div></a>
     </li>
-
+    @if (User.IsInRole("Administrator"))
+{
+    <li class="nav-item">
+        <a class="nav-link profile-nav-link" asp-area="" asp-page="/UserList"><div class="profile-nav-link nav-link-padding">Lista Użytkowników</div></a>
+    </li>
+}
 </ul>
