@@ -27,7 +27,20 @@
                     </div>
                 </ul>
             </div>
-           
+            <div class="tagi">
+            @foreach (var tagnote in Model.tagNotes)
+            {
+                foreach (var tag in Model.Tags)
+                {
+                    if (tag.TagId == tagnote.TagId && tagnote.NoteId == note.NoteId)
+                    {
+
+                        <a class="klasa-data">#@tag.Name </a>
+
+                    }
+                }
+            }
+            </div>
             <div class="likes">
                 <ul class="l">
                     @if (User.Identity.IsAuthenticated)
@@ -115,7 +128,7 @@
                         {
                             <li class="Comment-content">
                                 <p>@comment.Content</p> - Dodany @comment.Date_comment przez użytkownika @comment.UserId o IP @comment.Ip_computer
-                                @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId)
+                                @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId || User.IsInRole("Admin"))
                                 {
                                     <form class="form-delete-comment" method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id_comment">
                                         <button class="delete-comment" type="submit">Usuń</button>

@@ -74,8 +74,11 @@ namespace Miniblogiv2
                         await roleManager.CreateAsync(new IdentityRole(role));
                 }
 
-                var user = await userManage.FindByEmailAsync("zuzanna@gmail.com");
-                await userManage.AddToRoleAsync(user, "Admin");
+                var user = await userManage.FindByEmailAsync("michalpragacz2@gmail.com");
+                if (user != null)
+                {
+                    await userManage.AddToRoleAsync(user, "Admin");
+                }
             }
 
 

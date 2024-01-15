@@ -108,7 +108,7 @@
                 {
                     <li class="Comment-content">
                         <p>@comment.Content</p> - Dodany @comment.Date_comment przez użytkownika @comment.UserId o IP @comment.Ip_computer
-                        @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId)
+                        @if (User.Identity.Name == comment.UserId || loggedInUserId == note.UserId || User.IsInRole("Admin"))
                         {
                             <form class="form-delete-comment" method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id_comment">
                                 <button class="delete-comment" type="submit">Usuń</button>

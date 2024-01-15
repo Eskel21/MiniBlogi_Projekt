@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using MiniBlogiv2.Interfaces;
 using System.Security.Claims;
+using MiniBlogiv2.Data.Migrations;
 
 namespace MiniBlogiv2.Pages
 {
@@ -32,6 +33,8 @@ namespace MiniBlogiv2.Pages
         public List<Note> LatestNotes { get; set; }
         public List<Note> Notes { get; set; }
         public List<Comment> Comments { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<MiniBlogiv2.Data.Models.TagNote> tagNotes { get; set; }
         public int totalNotes { get; set; }
         public int pageNo { get; set; }
         public int pageSize { get; set; }
@@ -51,7 +54,8 @@ namespace MiniBlogiv2.Pages
             {
                 note.Comment = _commentService.GetComments(note.NoteId).ToList();
             }
-
+            Tags = _context.Tag.ToList();
+            tagNotes = _context.TagNote.ToList();
             return Page();
         }
         [Authorize]
