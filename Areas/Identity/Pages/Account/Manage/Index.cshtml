@@ -15,7 +15,7 @@
             </div>
             <div class="form-floatingv2">
                 <label class="name_label " asp-for="Input.PhoneNumber">Numer telefonu</label>
-            <input asp-for="Input.PhoneNumber" placeholder="123456789" class="form-control" />
+        <input asp-for="Input.PhoneNumber" maxlength="9" placeholder="123456789" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber"  class="text-danger"></span>
             </div>
             <button class="back" id="update-profile-button" type="submit">Zapisz</button>

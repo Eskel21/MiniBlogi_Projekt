@@ -239,6 +239,7 @@ li {
     display:flex;
     margin: 30px;
     justify-content:center;
+    text-align:center;
     width: 90%;
     font-size: 150px;
     font-weight: 700;
@@ -548,16 +549,20 @@ h1 {
     font-family: Lexend;
     font-weight: 500;
     font-size: 16px;
+    cursor:pointer;
+    transition: transform 0.3s ease;
 }
-.Comment-content {
-    font-size: 14px;
-    background: #E8BCB9;
-    border-radius: 25px;
-    color: #662549;
-    padding: 8px;
-    list-style:none;
-    margin-bottom:8px;
-}
+    .button-comment:hover{
+        transform:scale(1.1);
+    }.Comment-content {
+        font-size: 14px;
+        background: #E8BCB9;
+        border-radius: 25px;
+        color: #662549;
+        padding: 8px;
+        list-style: none;
+        margin-bottom: 8px;
+    }
 .Comment-content p{
     color: #1D1A39;
     font-family: Lexend;
@@ -779,6 +784,11 @@ display:none;
     letter-spacing: -0.16px;
     margin-top: 5px;
     margin-bottom:20px;
+    transition: transform 0.3s ease;
+    cursor:pointer;
+}
+.back:hover{
+    transform:scale(1.1);
 }
 .edit_img {
     display: flex;
@@ -965,6 +975,11 @@ form .name-label {
     letter-spacing: -0.16px;
     margin-top: 5px;
     margin-bottom: 20px;
+    cursor:pointer;
+    transition: transform 0.3s ease;
+}
+.backv2:hover{
+    transform: scale(1.1);
 }
 .disabled{
     color:grey;

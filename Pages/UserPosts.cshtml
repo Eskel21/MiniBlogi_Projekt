@@ -2,11 +2,13 @@
 @model MiniBlogiv2.Pages.UserPostsModel
 @using System.Security.Claims;
 @{
-    ViewData["Title"] = $"{Model.UserName}'s Posts";
+    ViewData["Title"] = $"Posty użytkownika {Model.UserName}";
     var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
     
 }
-
+<div class="wysrodkuj">
+<h1 class="Title-blogi">@ViewData["Title"]</h1>
+</div>
 <paging class="pagination" total-records="@Model.totalNotes" show-total-pages="false" show-total-records="false" page-size="@Model.pageSize" page-no="@Model.pageNo"></paging>
 
 <ul  class="lista-wpisow">
