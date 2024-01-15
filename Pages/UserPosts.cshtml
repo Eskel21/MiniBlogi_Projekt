@@ -26,6 +26,20 @@
                 </div>
             </ul>
        </div>
+        <div class="tagi">
+            @foreach (var tagnote in Model.tagNotes)
+            {
+                foreach (var tag in Model.Tags)
+                {
+                    if (tag.TagId == tagnote.TagId && tagnote.NoteId == note.NoteId)
+                    {
+
+                        <a class="klasa-data">#@tag.Name </a>
+
+                    }
+                }
+            }
+        </div>
         <div class="likes">
             <ul class="l">
                 @if (User.Identity.IsAuthenticated)

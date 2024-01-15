@@ -22,6 +22,8 @@ namespace MiniBlogiv2.Pages
         public Comment NewComment { get; set; }
         public string UserName { get; set; }
         public List<Note> UserNotes { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<MiniBlogiv2.Data.Models.TagNote> tagNotes { get; set; }
         public int totalNotes { get; set; }
         public int pageNo { get; set; }
         public int pageSize { get; set; }
@@ -41,8 +43,9 @@ namespace MiniBlogiv2.Pages
             totalNotes = _context.Note
             .Where(n => n.User.UserName == UserName).Count();
             pageNo = p;
-            
-           
+
+            Tags = _context.Tag.ToList();
+            tagNotes = _context.TagNote.ToList();
 
             return Page();
         }
